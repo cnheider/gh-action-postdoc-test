@@ -1,0 +1,36 @@
+name: On Pull Request Documentation Check
+
+on: [pull_request]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v1
+
+    - uses: cnheider/gh-action-doctor@master
+      with:
+        docs-folder: "docs/"
+
+    - uses: cnheider/gh-action-doctor@master
+      with:
+        build-command: "sphinx-build -b html . _build"
+        docs-folder: "docs/"
+
+    - uses: cnheider/gh-action-doctor@master
+      with:
+        pre-build-command: "apt-get update -y && apt-get install -y latexmk texlive-latex-recommended texlive-latex-extra texlive-fonts-recommended"
+        build-command: "make latexpdf"
+        docs-folder: "docs/"
+
+    - uses: actions/upload-artifact@v1    # Create an artifact of the html output.
+      with:
+        name: DocumentationHTML
+        path: docs/_build/html/
+
+    - uses: actions/upload-artifact@v1    # Create an artifact out of the previously built pdf.
+      with:
+        name: Documentation
+        path: docs/_build/latex/pdfexample.pdf
