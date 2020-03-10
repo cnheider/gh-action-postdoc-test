@@ -1,6 +1,9 @@
-name: On Pull Request Documentation Check
+name: On Push Master Documentation Check
 
-on: [pull_request]
+on:
+  push:
+    branches:
+      - master
 
 jobs:
   build:
