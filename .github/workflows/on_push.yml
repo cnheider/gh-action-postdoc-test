@@ -10,4 +10,4 @@ jobs:
     steps:
       - uses: actions/checkout@master
 
-      - uses: cnheider/postdoc@master
+      - uses: pything/postdoc@master

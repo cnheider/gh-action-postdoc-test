@@ -10,7 +10,7 @@ jobs:
     steps:
       - uses: actions/checkout@v1
 
-      - uses: cnheider/postdoc@master
+      - uses: pything/postdoc@master
 
       - uses: actions/upload-artifact@v1    # Create an artifact of the html output.
         with:
